@@ -56,7 +56,7 @@ public class Main {
 
 
             }
-
+            // Ensure spelling is right or it will not be added to ArrayLists or print
             else if (response.equals("2")) {
                 for (int i = 0; i < products.size(); i++) {
                     System.out.println(products.get(i) + " " + prices.get(i));
