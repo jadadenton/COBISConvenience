@@ -64,18 +64,18 @@ public class Main {
 
                 System.out.println("What do you wish to buy?");
                 customer = input.nextLine();
-                print.append(customer);
-                print.append(System.getProperty("line.separator"));
-                print.append(" ");
-                purchases.add(customer);
-                inventory.add(customer);
                 int index = 0;
                 for (int i = 0; i < products.size(); i++) {
                     if (products.get(i).equals(customer)) {
                         index = i;
+                        print.append(customer);
+                        purchases.add(customer);
+                        inventory.add(customer);
                     }
 
                 }
+                print.append(System.getProperty("line.separator"));
+                print.append(" ");
                 Double val1 = prices.get(index);
                 purchaseprice.add(val1);
                 inventoryprice.add(val1);
@@ -138,4 +138,3 @@ public class Main {
 
     }
 }
-
