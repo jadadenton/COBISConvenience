@@ -1,0 +1,141 @@
+package com.company;
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        ArrayList<String> products = new ArrayList<String>();
+        ArrayList<Double> prices = new ArrayList<Double>();
+        products.add("Red-Hot Spicy Doritos");
+        prices.add(2.99);
+        products.add("Cool Ranch Doritos");
+        prices.add(2.99);
+        products.add("Coke");
+        prices.add(0.99);
+        products.add("Diet Coke");
+        prices.add(0.99);
+        products.add("Pepsi");
+        prices.add(0.99);
+        products.add("Five Hour Energy");
+        prices.add(3.99);
+        products.add("Sunflower Seeds");
+        prices.add(0.99);
+        products.add("Peanuts");
+        prices.add(0.99);
+        products.add("Mac Book Chargers");
+        prices.add(120.00);
+        products.add("Dell Chargers");
+        prices.add(50.00);
+
+        Scanner input = new Scanner(System.in);
+        String response = "";
+        String name = "";
+        String customer;
+        StringBuilder print = new StringBuilder();
+        ArrayList<String> purchases = new ArrayList<String>();
+        ArrayList<Double> purchaseprice = new ArrayList<Double>();
+        ArrayList<String> inventory = new ArrayList<String>();
+        ArrayList<Double> inventoryprice = new ArrayList<Double>();
+        ArrayList<Double> grandtotal = new ArrayList<Double>();
+
+        double totalcost = 0.0;
+
+        do {
+            System.out.println("Make a Selection");
+            // you must select finish transaction before adding another customer
+            System.out.println(" 1) Add Customer 2) Add purchase  3) Show purchases 4) Finish transaction 5)Print Receipt");
+            response = input.nextLine();
+
+            if(response.equals("1")) {
+                System.out.println("Enter Customer Name");
+                name = input.nextLine();
+                print.append(name);
+                print.append(System.getProperty("line.separator"));
+                print.append(" ");
+
+
+            }
+
+            else if (response.equals("2")) {
+                for (int i = 0; i < products.size(); i++) {
+                    System.out.println(products.get(i) + " " + prices.get(i));
+                }
+
+                System.out.println("What do you wish to buy?");
+                customer = input.nextLine();
+                print.append(customer);
+                print.append(System.getProperty("line.separator"));
+                print.append(" ");
+                purchases.add(customer);
+                inventory.add(customer);
+                int index = 0;
+                for (int i = 0; i < products.size(); i++) {
+                    if (products.get(i).equals(customer)) {
+                        index = i;
+                    }
+
+                }
+                Double val1 = prices.get(index);
+                purchaseprice.add(val1);
+                inventoryprice.add(val1);
+
+
+
+
+            } else if (response.equals("3")) {
+                System.out.println("Purchases Displayed");
+                System.out.println(purchases);
+
+            } else if (response.equals("4")) {
+                double val = 0;
+                for (int i = 0; i < purchases.size(); i++) {
+
+                    int j = 0;
+                    do {
+                        if (purchases.get(i).equals(products.get(j))) {
+                            val = prices.get(j);
+                            totalcost = totalcost + val;
+
+                        }
+                        j++;
+                    } while (j < products.size());
+
+                }
+
+                System.out.println(name);
+                for (int i = 0; i < purchases.size(); i++) {
+                    System.out.println(purchases.get(i) + " " + purchaseprice.get(i));
+                }
+                System.out.println("Total Cost: " + totalcost);
+                grandtotal.add(totalcost);
+                print.append("Total Cost: " + totalcost);
+                print.append(System.getProperty("line.separator"));
+                purchases.clear();
+                purchaseprice.clear();
+                totalcost = 0.0;
+
+            }
+
+
+        } while (!response.equals("5"));
+        System.out.println(print);
+
+        System.out.println("Inventory Sold");
+        Set<String> distinct = new HashSet<>(inventory);
+        for (String x: distinct) {
+            System.out.println(x + " (" + Collections.frequency(inventory, x) + ")");
+
+        }
+
+        double sum = 0;
+        for (int i = 0; i < grandtotal.size(); i++) {
+            sum+= grandtotal.get(i);
+        }
+        System.out.println(" ");
+        System.out.println("Grand Total: " + sum);
+
+
+    }
+}
+
